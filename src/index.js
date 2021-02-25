@@ -1,5 +1,5 @@
 import store from "./store";
-
+import * as actions from "./actionTypes";
 const usubscribe = store.subscribe(() => {
   console.log("state changed", store.getState());
 });
@@ -7,13 +7,13 @@ const usubscribe = store.subscribe(() => {
 // console.log(store.getState());
 
 store.dispatch({
-  type: "BUG_ADDED",
+  type: actions.BUG_ADDED,
   payload: { description: "bug 01" },
 });
 // console.log(store.getState());
 usubscribe();
 store.dispatch({
-  type: "BUG_REMOVED",
+  type: actions.BUG_REMOVED,
   payload: { id: 1 },
 });
 // console.log(store.getState());
