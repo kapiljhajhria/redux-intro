@@ -1,21 +1,23 @@
 //libraries to force immutabel
 //immutable , Immer , Mori
 
-import { Map } from "immutable";
+import { produce } from "immer";
 
 let book = { title: "Harry Potter" };
 
-let bookMap = Map({ title: "Harry Potter Map" });
+// let bookMap = Map({ title: "Harry Potter Map" });
 function publish(book) {
-  book.isPublished = true;
+  // book.isPublished = true;
+  return produce(book, (draftBook) => {
+    draftBook.isPublished = "true";
+  });
 }
 
-function publishBookMap(book) {
-  return book.set("isPublished", true);
-}
+// function publishBookMap(book) {
+//   return book.set("isPublished", true);
+// }
 
-publish(book);
-console.log(bookMap);
-console.log(bookMap.get("title"));
-bookMap = publishBookMap(bookMap);
-console.log(bookMap.toJS());
+const updated = publish(book);
+
+// bookMap = publishBookMap(bookMap);
+console.log(updated);
