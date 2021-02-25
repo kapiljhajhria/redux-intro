@@ -1,47 +1,21 @@
-const person = {
-  name: "john",
-  address: {
-    country: "india",
-    city: "Delhi",
-  },
-};
+//libraries to force immutabel
+//immutable , Immer , Mori
 
-person.name = "kapil"; //
+import { Map } from "immutable";
 
-const newPerson = Object.assign({}, person, { name: "kapil object assign" }); //shallow copy only
+let book = { title: "Harry Potter" };
 
-//another method  shallow copy only
-const anotherPerson = { ...person, name: "kapil destructuring" };
-anotherPerson.address.city = "kolkata";
-console.log(newPerson);
-console.log(anotherPerson);
+let bookMap = Map({ title: "Harry Potter Map" });
+function publish(book) {
+  book.isPublished = true;
+}
 
-console.log(person); //original object city gets updated as well because we made shallow copy only
+function publishBookMap(book) {
+  return book.set("isPublished", true);
+}
 
-//deep copy
-
-const deepCopiedPerson = JSON.parse(JSON.stringify(person));
-
-deepCopiedPerson.address.city = "mumbai";
-console.log(person);
-console.log(deepCopiedPerson);
-
-const numbers = [1, 2, 3];
-
-const index = numbers.indexOf(2);
-const added = [...numbers.slice(0, index), 4, ...numbers.slice(index)];
-console.log("added", added);
-
-//removing
-
-const removed = numbers.filter((n) => n !== 2);
-
-console.log(removed);
-
-//updating
-
-const updatedArr = numbers.map((n) => (n === 2 ? 20 : n));
-
-console.log(updatedArr);
-
-console.log(numbers); //[1,2,3]  remains unchanged
+publish(book);
+console.log(bookMap);
+console.log(bookMap.get("title"));
+bookMap = publishBookMap(bookMap);
+console.log(bookMap.toJS());
