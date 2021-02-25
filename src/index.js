@@ -1,28 +1,47 @@
-import { compose, pipe } from "lodash/fp";
+const person = {
+  name: "john",
+  address: {
+    country: "india",
+    city: "Delhi",
+  },
+};
 
-//not pure function as it will return diff result each time
-//can't use random value, date etc in pure function
-function myFunction(number) {
-  return number * Math.random();
-}
+person.name = "kapil"; //
 
-console.log(myFunction(5));
-console.log(myFunction(5));
-console.log(myFunction(5));
+const newPerson = Object.assign({}, person, { name: "kapil object assign" }); //shallow copy only
 
-//Pure function as it will always return same output for given input
-function myPureFunction(number) {
-  return number * 2;
-}
-const minAge = 18;
+//another method  shallow copy only
+const anotherPerson = { ...person, name: "kapil destructuring" };
+anotherPerson.address.city = "kolkata";
+console.log(newPerson);
+console.log(anotherPerson);
 
-//if we change minAge then it will no longer be pure function
-function isEligible(age) {
-  return age > minAge;
-}
+console.log(person); //original object city gets updated as well because we made shallow copy only
 
-//now its a pure function as it will return same output for given set of input
+//deep copy
 
-function isEligible2(age, minAge) {
-  return age > minAge;
-}
+const deepCopiedPerson = JSON.parse(JSON.stringify(person));
+
+deepCopiedPerson.address.city = "mumbai";
+console.log(person);
+console.log(deepCopiedPerson);
+
+const numbers = [1, 2, 3];
+
+const index = numbers.indexOf(2);
+const added = [...numbers.slice(0, index), 4, ...numbers.slice(index)];
+console.log("added", added);
+
+//removing
+
+const removed = numbers.filter((n) => n !== 2);
+
+console.log(removed);
+
+//updating
+
+const updatedArr = numbers.map((n) => (n === 2 ? 20 : n));
+
+console.log(updatedArr);
+
+console.log(numbers); //[1,2,3]  remains unchanged
