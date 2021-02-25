@@ -10,6 +10,13 @@ export function bugAdded(descriptiopn) {
 export function bugRemoved(id) {
   return {
     type: actions.BUG_REMOVED,
-    payload: { id: 1 },
+    payload: { id: id },
+  };
+}
+
+export function bugResolved(id) {
+  return {
+    type: actions.BUG_RESOLVED,
+    payload: { id: id },
   };
 }

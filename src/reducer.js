@@ -1,9 +1,9 @@
 const { lastIndexOf } = require("lodash");
 import * as actions from "./actionTypes";
 
+let lastId = 0;
 export default function reducer(state = [], action) {
   // if (action.type === actions.BUG_ADDED) {
-  //   let lastId = state.length === 0 ? 0 : state[state.length - 1].id;
   //   return [
   //     ...state,
   //     {
@@ -17,8 +17,7 @@ export default function reducer(state = [], action) {
   // }
 
   switch (action.type) {
-    case "BUG_ADDED": {
-      const lastId = state[state.length - 1].id;
+    case actions.BUG_ADDED: {
       return [
         ...state,
         {
@@ -28,12 +27,16 @@ export default function reducer(state = [], action) {
         },
       ];
     }
-    case "BUG_REMOVED": {
+    case actions.BUG_REMOVED: {
       return [...state.filter((bug) => bug.id !== action.payload.id)];
+    }
+
+    case actions.BUG_RESOLVED: {
+      return state.map((bug) =>
+        bug.id !== action.payload.id ? bug : { ...bug, resolved: true }
+      );
     }
     default:
       return state;
   }
-
-  return state;
 }
