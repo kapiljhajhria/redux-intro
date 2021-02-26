@@ -9,10 +9,10 @@ const usubscribe = store.subscribe(() => {
 
 // console.log(store.getState());
 
-store.dispatch(actions.bugAdded("bug 01"));
+store.dispatch(actions.bugAdded({ description: "bug 01" }));
 // console.log(store.getState());
 // usubscribe();
-store.dispatch(actions.bugAdded("bug 02"));
-store.dispatch(actions.bugRemoved(1));
+store.dispatch(actions.bugAdded({ description: "bug 02" }));
+store.dispatch(actions.bugRemoved({ id: 1 }));
 // console.log(store.getState());
-store.dispatch(actions.bugResolved(2));
+store.dispatch(actions.bugResolved({ id: 2 }));

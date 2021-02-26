@@ -1,38 +1,9 @@
 import { createAction } from "@reduxjs/toolkit";
 
-// const bugUpdated = createAction("bugUpdated");
-// console.log(bugUpdated(1));
+//actiontype and action using redux toolkit
 
-// //action types
-
-// const BUG_ADDED = "bugAdded";
-// const BUG_REMOVED = "bugRemoved";
-// const BUG_RESOLVED = "bugResolved";
-
-// Action creators
-
-// export function bugAdded(descriptiopn) {
-//   return {
-//     type: BUG_ADDED,
-//     payload: { description: descriptiopn },
-//   };
-// }
 export const bugAdded = createAction("bugAdded");
-
-// export function bugRemoved(id) {
-//   return {
-//     type: BUG_REMOVED,
-//     payload: { id: id },
-//   };
-// }
 export const bugRemoved = createAction("bugRemoved");
-
-// export function bugResolved(id) {
-//   return {
-//     type: BUG_RESOLVED,
-//     payload: { id: id },
-//   };
-// }
 export const bugResolved = createAction("bugResolved");
 
 //reducer
