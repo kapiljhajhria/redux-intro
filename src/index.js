@@ -13,6 +13,7 @@ store.dispatch(actions.bugAdded({ description: "bug 01" }));
 // console.log(store.getState());
 // usubscribe();
 store.dispatch(actions.bugAdded({ description: "bug 02" }));
+store.dispatch(actions.bugAdded({ description: "bug 03" }));
 store.dispatch(actions.bugRemoved({ id: 1 }));
 // console.log(store.getState());
 store.dispatch(actions.bugResolved({ id: 2 }));
