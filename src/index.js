@@ -24,6 +24,9 @@
 
 import store from "./customeStore";
 import * as actions from "./actionsCreators";
+store.subscribe(() => {
+  console.log("store changed", store.getState());
+});
 
 store.dispatch(actions.bugAdded("bug 001"));
 
