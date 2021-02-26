@@ -15,9 +15,16 @@
 // // console.log(store.getState());
 // store.dispatch(bugResolved(2));
 
+// import store from "./customeStore";
+
+// store.state = 1;
+
+// // console.log(store.state);
+// console.log(store);
+
 import store from "./customeStore";
+import * as actions from "./actionsCreators";
 
-store.state = 1;
+store.dispatch(actions.bugAdded("bug 001"));
 
-// console.log(store.state);
-console.log(store);
+console.log(store.getState());
