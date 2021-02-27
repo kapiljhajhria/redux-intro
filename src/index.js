@@ -25,8 +25,12 @@ store.dispatch((dispatch, getState) => {
   console.log(getState());
   //if proise is rejected =>dispatch()
 });
+store.dispatch({
+  type: "error",
+  payload: { message: "An error has occured" },
+});
 
-// store.dispatch(userAdded({ name: "kapil" }));
+store.dispatch(userAdded({ name: "kapil" }));
 // store.dispatch(projectAdded({ name: "Porject 02" }));
 // store.dispatch(bugAdded({ description: "bug 01" }));
 // store.dispatch(bugAdded({ description: "bug 02" }));
