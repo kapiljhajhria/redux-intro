@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { createSelector } from "reselect";
 
 //creating slice - combining action and reducor using redux-toolkit
 let lastId = 0;
@@ -31,5 +32,15 @@ export default slice.reducer;
 
 //specific store should handle all queries related to that store
 //Selector
-export const getUnresolvedBugsSelector = (state) =>
-  state.entities.bugs.filter((bug) => bug.resolved === false);
+//not the best way to create queries/Selectors as
+// its output changes even if the store state hasn't changed
+// export const getUnresolvedBugsSelector = (state) =>
+//   state.entities.bugs.filter((bug) => bug.resolved === false);
+
+//uisng reselct library to create Selectors, not the output is cached
+// and same output is returned if the store state hasn't changed
+export const getUnresolvedBugsSelector = createSelector(
+  (state) => state.entities.bugs,
+  (state) => state.entities.projects,
+  (bugs, projects) => bugs.filter((bug) => !bug.resolved) //if state and projects remain unchanged then this logic won't be recalculated again
+);

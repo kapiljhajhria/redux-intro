@@ -30,6 +30,13 @@ store.dispatch(bugResolved({ id: 2 }));
 //   .entities.bugs.filter((bug) => bug.resolved === false);
 
 //better way to get data
-const unresolved = getUnresolvedBugsSelector(store.getState());
+const unresolvedX = getUnresolvedBugsSelector(store.getState());
+const unresolvedY = getUnresolvedBugsSelector(store.getState());
+//if state hasn't changed then get result from cache instead of computing it again
 
-console.log(unresolved);
+console.log(unresolvedX === unresolvedY); //return false, it should return true.
+//in this case it will cause to re render componenets even when state hasn't changed
+//we should get same output if the store state hasn't changed
+//so we memorize the selectors
+
+// console.log(unresolved);
