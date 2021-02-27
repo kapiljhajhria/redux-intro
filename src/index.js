@@ -16,6 +16,10 @@ const usubscribe = store.subscribe(() => {
   console.log("state changed", store.getState());
 });
 
+//in order to pass function as a paramter we used custom middleware called func here
+//without func middleware we will get error
+store.dispatch(() => {});
+
 store.dispatch(userAdded({ name: "kapil" }));
 // store.dispatch(projectAdded({ name: "Porject 02" }));
 // store.dispatch(bugAdded({ description: "bug 01" }));
