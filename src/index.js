@@ -18,4 +18,3 @@ store.dispatch(actions.bugAdded({ description: "bug 03" }));
 store.dispatch(actions.bugRemoved({ id: 1 }));
 // console.log(store.getState());
 store.dispatch(actions.bugResolved({ id: 2 }));
-store.dispatch(actions.projectAdded({ name: "Porject 01" }));
