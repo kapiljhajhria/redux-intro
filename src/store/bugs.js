@@ -28,3 +28,8 @@ const slice = createSlice({
 
 export const { bugAdded, bugRemoved, bugResolved } = slice.actions;
 export default slice.reducer;
+
+//specific store should handle all queries related to that store
+//Selector
+export const getUnresolvedBugsSelector = (state) =>
+  state.entities.bugs.filter((bug) => bug.resolved === false);
