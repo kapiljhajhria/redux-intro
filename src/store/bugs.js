@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { createSelector } from "reselect";
+import { apiCallBegan } from "./api";
 
 //creating slice - combining action and reducor using redux-toolkit
 let lastId = 0;
@@ -46,8 +47,21 @@ export const {
   bugRemoved,
   bugResolved,
   bugAssignedToUser,
+  bugsReceived,
 } = slice.actions;
 export default slice.reducer;
+
+//Actions Creators
+
+const url = "/bugs";
+export const loadBugs = () => {
+  return apiCallBegan({
+    url: url,
+    // method: "get",
+    // data: {},
+    onSuccess: bugsReceived.type, //or slice.actions.bugsReceived.type
+  });
+};
 
 //specific store should handle all queries related to that store
 //Selector

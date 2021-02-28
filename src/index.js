@@ -6,6 +6,7 @@ import {
   getUnresolvedBugsSelector,
   bugAssignedToUser,
   getBugsByUserSelector,
+  loadBugs,
 } from "./store/bugs";
 import { projectAdded } from "./store/projects";
 import { userAdded } from "./store/users";
@@ -16,14 +17,18 @@ const store = configureStore();
 // const usubscribe = store.subscribe(() => {
 //   console.log("state changed", store.getState());
 // });
-store.dispatch(
-  actions.apiCallBegan({
-    url: "/bugs",
-    // method: "get",
-    // data: {},
-    onSuccess: "bugs/bugsReceived",
-  })
-);
+
+//UI layer
+store.dispatch(loadBugs());
+
+// store.dispatch(
+//   actions.apiCallBegan({
+//     url: "/bugs",
+//     // method: "get",
+//     // data: {},
+//     onSuccess: "bugs/bugsReceived",
+//   })
+// );
 
 // store.dispatch(userAdded({ name: "kapil" }));
 
