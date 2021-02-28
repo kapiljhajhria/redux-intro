@@ -29,9 +29,16 @@ const api = (store) => (next) => async (action) => {
       method: method,
       data: data,
     });
-    store.dispatch({ type: onSuccess, payload: response.data });
+    //general success action
+    store.dispatch(actions.apiCallSuccess(response.data));
+    //specific resposne action if its mentioned
+    if (onSuccess) store.dispatch({ type: onSuccess, payload: response.data });
   } catch (error) {
-    store.dispatch({ type: onError, payload: error });
+    //dispatch general error action as it will probably be same for most classes
+    store.dispatch(actions.apiCallFailed(error));
+
+    //for specific scenarios we can dispatch custom action
+    if (onError) store.dispatch({ type: onError, payload: error });
   }
 };
 

@@ -22,7 +22,6 @@ store.dispatch(
     // method: "get",
     // data: {},
     onSuccess: "bugsReceived",
-    onError: actions.apiCallFailed.type,
   })
 );
 
