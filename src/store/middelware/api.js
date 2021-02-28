@@ -19,8 +19,10 @@ const api = (store) => (next) => async (action) => {
     next(action);
     return;
   }
+  const { url, method, data, onSuccess, onError, onStart } = action.payload;
+
+  if (onStart) store.dispatch({ type: onStart }); //for laoding indicator
   next(action);
-  const { url, method, data, onSuccess, onError } = action.payload;
 
   try {
     const response = await axios.request({

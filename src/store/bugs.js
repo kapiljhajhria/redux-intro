@@ -14,9 +14,12 @@ const slice = createSlice({
   },
   reducers: {
     //actions=>action handlers
+    bugsRequested: (bugs, action) => {
+      bugs.loading = true;
+    },
     bugsReceived: (bugs, action) => {
       bugs.list = action.payload;
-      // bugs.loading = false;
+      bugs.loading = false;
       // bugs.lastFetch = new Date();
     },
     bugAdded: (bugs, action) => {
@@ -39,6 +42,9 @@ const slice = createSlice({
       const index = bugs.list.findIndex((bug) => bug.id === bugId);
       bugs[index].userId = userId;
     },
+    bugRequestFailed: (bugs, action) => {
+      bugs.loading = false;
+    },
   },
 });
 
@@ -48,18 +54,22 @@ export const {
   bugResolved,
   bugAssignedToUser,
   bugsReceived,
+  bugsRequested,
+  bugRequestFailed,
 } = slice.actions;
 export default slice.reducer;
 
 //Actions Creators
 
-const url = "/bugs";
+const url = "/bug";
 export const loadBugs = () => {
   return apiCallBegan({
     url: url,
     // method: "get",
     // data: {},
+    onStart: bugsRequested.type,
     onSuccess: bugsReceived.type, //or slice.actions.bugsReceived.type
+    onError: bugRequestFailed.type,
   });
 };
 
