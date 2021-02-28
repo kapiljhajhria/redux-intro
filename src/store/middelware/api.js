@@ -1,5 +1,5 @@
 import axios from "axios";
-
+import * as actions from "../api";
 // const action = {
 //   actiontype: "apiCallBegan",
 //   payload: {
@@ -15,7 +15,7 @@ import axios from "axios";
 
 const api = (store) => (next) => async (action) => {
   console.log("action type is", action.type);
-  if (action.type !== "apiCallBegan") {
+  if (action.type !== actions.apiCallBegan.type) {
     next(action);
     return;
   }

@@ -9,12 +9,25 @@ import {
 } from "./store/bugs";
 import { projectAdded } from "./store/projects";
 import { userAdded } from "./store/users";
+import * as actions from "./store/api";
 
 const store = configureStore();
 
 // const usubscribe = store.subscribe(() => {
 //   console.log("state changed", store.getState());
 // });
+store.dispatch(
+  actions.apiCallBegan({
+    url: "/bugs",
+    // method: "get",
+    // data: {},
+    onSuccess: "bugsReceived",
+    onError: "apiRequestFailed",
+  })
+);
+
+//this one won't work as its type its apiCallBegan and we are now looking for api/callBegan
+//only the above dispacted action will work
 store.dispatch({
   type: "apiCallBegan",
   payload: {
