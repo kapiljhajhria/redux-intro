@@ -6,27 +6,31 @@ let lastId = 0;
 
 const slice = createSlice({
   name: "bugs",
-  initialState: [],
+  initialState: {
+    list: [],
+    loading: false,
+    lastFetch: null,
+  },
   reducers: {
     //actions=>action handlers
     bugAdded: (bugs, action) => {
-      bugs.push({
+      bugs.list.push({
         id: ++lastId,
         description: action.payload.description,
         resolved: false,
       });
     },
     bugResolved: (bugs, action) => {
-      const index = bugs.findIndex((bug) => bug.id === action.payload.id);
+      const index = bugs.list.findIndex((bug) => bug.id === action.payload.id);
       bugs[index].resolved = true;
     },
     bugRemoved: (bugs, action) => {
-      const index = bugs.findIndex((bug) => bug.id === action.payload.id);
-      bugs.splice(index, 1);
+      const index = bugs.list.findIndex((bug) => bug.id === action.payload.id);
+      bugs.list.splice(index, 1);
     },
     bugAssignedToUser: (bugs, action) => {
       const { bugId, userId } = action.payload;
-      const index = bugs.findIndex((bug) => bug.id === bugId);
+      const index = bugs.list.findIndex((bug) => bug.id === bugId);
       bugs[index].userId = userId;
     },
   },
@@ -45,19 +49,19 @@ export default slice.reducer;
 //not the best way to create queries/Selectors as
 // its output changes even if the store state hasn't changed
 // export const getUnresolvedBugsSelector = (state) =>
-//   state.entities.bugs.filter((bug) => bug.resolved === false);
+//   state.entities.bugs.list.filter((bug) => bug.resolved === false);
 
 //uisng reselct library to create Selectors, not the output is cached
 // and same output is returned if the store state hasn't changed
 export const getUnresolvedBugsSelector = createSelector(
   (state) => state.entities.bugs,
   (state) => state.entities.projects,
-  (bugs, projects) => bugs.filter((bug) => !bug.resolved) //if state and projects remain unchanged then this logic won't be recalculated again
+  (bugs, projects) => bugs.list.filter((bug) => !bug.resolved) //if state and projects remain unchanged then this logic won't be recalculated again
 );
 
 export const getBugsByUserSelector = (userId) =>
   createSelector(
     (state) => state.entities.bugs,
     (state) => state.entities.projects,
-    (bugs, projects) => bugs.filter((bug) => bug.userId === userId) //if state and projects remain unchanged then this logic won't be recalculated again
+    (bugs, projects) => bugs.list.filter((bug) => bug.userId === userId) //if state and projects remain unchanged then this logic won't be recalculated again
   );
