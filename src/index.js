@@ -26,32 +26,6 @@ store.dispatch(
   })
 );
 
-//this one won't work as its type its apiCallBegan and we are now looking for api/callBegan
-//only the above dispacted action will work
-// store.dispatch({
-//   type: "apiCallBegan",
-//   payload: {
-//     url: "/bugs",
-//     // method: "get",
-//     // data: {},
-//     onSuccess: "bugsReceived",
-//     onError: "apiRequestFailed",
-//   },
-// });
-//in order to pass function as a paramter we used custom middleware called func here
-//without func middleware we will get error
-// store.dispatch((dispatch, getState) => {
-//   //call an api
-//   //when promise is resolved =>dispatch()
-//   dispatch({ type: "bugsReceived", bugs: [1, 2, 3] });
-//   console.log(getState());
-//   //if proise is rejected =>dispatch()
-// });
-// store.dispatch({
-//   type: "error",
-//   payload: { message: "An error has occured" },
-// });
-
 // store.dispatch(userAdded({ name: "kapil" }));
 
 // store.dispatch(projectAdded({ name: "Porject 02" }));
