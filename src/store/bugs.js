@@ -13,6 +13,11 @@ const slice = createSlice({
   },
   reducers: {
     //actions=>action handlers
+    bugsReceived: (bugs, action) => {
+      bugs.list = action.payload;
+      // bugs.loading = false;
+      // bugs.lastFetch = new Date();
+    },
     bugAdded: (bugs, action) => {
       bugs.list.push({
         id: ++lastId,

@@ -32,6 +32,7 @@ const api = (store) => (next) => async (action) => {
     //general success action
     store.dispatch(actions.apiCallSuccess(response.data));
     //specific resposne action if its mentioned
+    console.log("onSuccess value is", onSuccess);
     if (onSuccess) store.dispatch({ type: onSuccess, payload: response.data });
   } catch (error) {
     //dispatch general error action as it will probably be same for most classes

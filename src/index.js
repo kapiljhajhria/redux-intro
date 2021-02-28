@@ -21,7 +21,7 @@ store.dispatch(
     url: "/bugs",
     // method: "get",
     // data: {},
-    onSuccess: "bugsReceived",
+    onSuccess: "bugs/bugsReceived",
   })
 );
 
