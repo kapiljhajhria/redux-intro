@@ -38,10 +38,10 @@ const api = (store) => (next) => async (action) => {
     if (onSuccess) store.dispatch({ type: onSuccess, payload: response.data });
   } catch (error) {
     //dispatch general error action as it will probably be same for most classes
-    store.dispatch(actions.apiCallFailed(error));
+    store.dispatch(actions.apiCallFailed(error.message));
 
     //for specific scenarios we can dispatch custom action
-    if (onError) store.dispatch({ type: onError, payload: error });
+    if (onError) store.dispatch({ type: onError, payload: error.message });
   }
 };
 
